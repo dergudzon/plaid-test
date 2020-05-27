@@ -162,12 +162,12 @@ def main(
     pivot_result.fillna('-', inplace=True)
 
     # need openpyxl
-    df_transactions_raw_data.to_excel('./Zagrebin_Plaid_raw_data.xlsx')
-    pivot_result.to_excel('./Zagrebin_Plaid_test_result.xlsx')
-    print(pivot_result)
+    excel_writer = pd.ExcelWriter('Zagrebin_Plaid_test.xlsx')
+    df_transactions_raw_data.to_excel(excel_writer, 'Raw data')
+    pivot_result.to_excel(excel_writer, 'Result sheet')
+    excel_writer.save()
 
-    google_upload('./Zagrebin_Plaid_raw_data.xlsx', 'Zagrebin_Plaid_raw_data')
-    google_upload('./Zagrebin_Plaid_test_result.xlsx', 'Zagrebin_Plaid_test_result')
+    google_upload('./Zagrebin_Plaid_test.xlsx', 'Zagrebin_Plaid_test')
 
     return None
 
